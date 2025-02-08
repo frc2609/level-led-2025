@@ -30,18 +30,18 @@ public class Led extends SubsystemBase {
     int segment_size = (LENGTH/5);
     for (var j = 0; j < segment_size-1; j+=1) {
     System.out.println("j:" + j); 
-    
     m_ledBuffer.setHSV((4*segment_size)+j, 60, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
     m_ledBuffer.setHSV(j, 0, 255, 32);
     }
-    //jjjji
+
+    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
+    
     m_led.setData(m_ledBuffer);
      
   }
@@ -52,16 +52,16 @@ public class Led extends SubsystemBase {
     System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, 60, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
     m_ledBuffer.setHSV(j, 0, 255, 32);
     }
-    //jjjji
+    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
+    
     m_led.setData(m_ledBuffer);
      
   }
@@ -72,16 +72,16 @@ public class Led extends SubsystemBase {
     System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, 60, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
     m_ledBuffer.setHSV(j, 0, 255, 32);
     }
-    //jjjji
+    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
+    
     m_led.setData(m_ledBuffer);
      
   }
@@ -92,16 +92,16 @@ public class Led extends SubsystemBase {
     System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, 60, 255, 32);
-    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
     m_ledBuffer.setHSV(j, 0, 255, 32);
     }
-    //jjjji
+    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
+    
     m_led.setData(m_ledBuffer);
      
   }
@@ -110,17 +110,17 @@ public class Led extends SubsystemBase {
     int segment_size = (LENGTH/5);
     for (var j = 0; j < segment_size-1; j+=1) {
       System.out.println("j:" + j); 
-      m_ledBuffer.setHSV((4*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((4*segment_size)+j, 0, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, 0, 255, 32);
-    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
     m_ledBuffer.setHSV(j, 60, 255, 32);
 }
-//jjjji
+    m_ledBuffer.setHSV((segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((2*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((3*segment_size), 30, 255, 32);
+    m_ledBuffer.setHSV((4*segment_size), 30, 255, 32);
+
 m_led.setData(m_ledBuffer);
   }
 }
