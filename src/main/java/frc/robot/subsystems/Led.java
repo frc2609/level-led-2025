@@ -19,7 +19,7 @@ public class Led extends SubsystemBase {
   final int in_position = 60;//led hue
   final int not_in_position = 90;//led hue
   int position = not_in_position;//led hue
-  private static final int LENGTH = 100;
+  private static final int LENGTH = 73;
   final int segment_size = (LENGTH/5);
   int lvl_4_Angle = 45;
   int lvl_3_Angle = 35;
@@ -46,7 +46,7 @@ public class Led extends SubsystemBase {
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size-1; j+=1) {
+    for (var j = 0; j < segment_size; j+=1) {
     //System.out.println("j:" + j);
     m_ledBuffer.setHSV((4*segment_size)+j, position, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
@@ -72,7 +72,7 @@ public class Led extends SubsystemBase {
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size-1; j+=1) {
+    for (var j = 0; j < segment_size; j+=1) {
     //System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
@@ -96,7 +96,7 @@ public class Led extends SubsystemBase {
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size-1; j+=1) {
+    for (var j = 0; j < segment_size; j+=1) {
     //System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
@@ -120,7 +120,7 @@ public class Led extends SubsystemBase {
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size-1; j+=1) {
+    for (var j = 0; j < segment_size; j+=1) {
     //System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
@@ -144,7 +144,7 @@ public class Led extends SubsystemBase {
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size-1; j+=1) {
+    for (var j = 0; j < segment_size; j+=1) {
       //System.out.println("j:" + j); 
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
