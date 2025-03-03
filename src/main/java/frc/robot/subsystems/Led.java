@@ -143,7 +143,7 @@ public class Led extends SubsystemBase {
       position = in_position;
     } else {
       position = not_in_position;
-    }
+    } 
     for (var j = 0; j < segment_size; j+=1) {
       //System.out.println("j:" + j); 
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
