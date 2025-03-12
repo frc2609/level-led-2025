@@ -5,20 +5,12 @@
 package frc.robot;
 
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.Autos;
 import frc.robot.commands.NoCoralLed;
 import frc.robot.commands.Lvl1Led;
 import frc.robot.commands.Lvl2Led;
 import frc.robot.commands.Lvl3Led;
 import frc.robot.commands.Lvl4Led;
-import frc.robot.commands.drive;
-import frc.robot.commands.restart;
-import frc.robot.subsystems.BigRedButton;
-import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Led;
-import frc.robot.subsystems.TankDrive;
-import frc.robot.subsystems.Time;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
@@ -31,9 +23,8 @@ import edu.wpi.first.wpilibj2.command.button.Trigger;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+
   private final Led led = new Led();
-  private final TankDrive m_TankDrive = new TankDrive();
   
   //private final BigRedButton vex_button = new BigRedButton();
   //private final Time m_time = new Time();
@@ -44,8 +35,6 @@ public class RobotContainer {
   private final Lvl2Led lvl2command = new Lvl2Led(led);
   private final Lvl1Led lvl1command = new Lvl1Led(led);
   private final NoCoralLed nocoralcommand = new NoCoralLed(led);
-  private final drive drivecommand = new drive(m_TankDrive);
-  //private final EStop stop = new EStop(m_TankDrive);
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
   private final CommandXboxController m_driverController =
@@ -71,16 +60,15 @@ public class RobotContainer {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
     // Schedule `exampleMethodCommand` when the Xbox controller's B button is pressed,
     // cancelling on release.
-    m_driverController.y().whileTrue(lvl4command);
-    m_driverController.x().whileTrue(lvl3command);
-    m_driverController.b().whileTrue(lvl2command);
-    m_driverController.a().whileTrue(lvl1command);
+    m_driverController.y().onTrue(lvl4command);
+    m_driverController.x().onTrue(lvl3command);
+    m_driverController.b().onTrue(lvl2command);
+    m_driverController.a().onTrue(lvl1command);
     
   }
 
   private void configureDefaultCommands() {
     led.setDefaultCommand(nocoralcommand);
-    m_TankDrive.setDefaultCommand(drivecommand);
     
   }
 
@@ -91,6 +79,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An example command will be run in autonomous
-    return Autos.exampleAuto(m_exampleSubsystem);
+    return nocoralcommand;
   }
 }

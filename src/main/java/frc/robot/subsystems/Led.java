@@ -5,6 +5,7 @@ import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 
@@ -30,7 +31,7 @@ public class Led extends SubsystemBase {
   public Led() {
     // Init variables here
     SmartDashboard.putNumber("Encoder", 0);
-    m_led = new AddressableLED(9);
+    m_led = new AddressableLED(Constants.LedConstants.LED_STRIP_PORT);
     m_ledBuffer = new AddressableLEDBuffer(LENGTH);     
 
     m_led.setLength(m_ledBuffer.getLength());
