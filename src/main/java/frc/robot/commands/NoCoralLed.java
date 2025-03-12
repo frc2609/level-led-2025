@@ -21,7 +21,7 @@ public class NoCoralLed extends Command {
 
   @Override
   public void execute() {
-    led.NoCoral();
+    led.Coral();
   }
 
   public boolean isFinished() {

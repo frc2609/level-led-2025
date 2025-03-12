@@ -22,6 +22,7 @@ public class Lvl2Led extends Command {
   @Override
   public void execute() {
     led.elevatorlvl2();
+    led.Coral();
   }
 
   public boolean isFinished() {

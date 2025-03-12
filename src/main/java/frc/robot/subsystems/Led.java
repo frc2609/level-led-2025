@@ -13,7 +13,7 @@ public class Led extends SubsystemBase {
 
   private AddressableLED m_led;
   private AddressableLEDBuffer m_ledBuffer;
-  DutyCycleEncoder encoderAngle = new DutyCycleEncoder(0);
+  private DutyCycleEncoder encoderAngle = new DutyCycleEncoder(0);
   final int seperation = 30;//led hue
   final int not_selected = 0;//led hue
   final int in_position = 60;//led hue
@@ -29,6 +29,7 @@ public class Led extends SubsystemBase {
   int threshold = 5;
   public Led() {
     // Init variables here
+    SmartDashboard.putNumber("Encoder", 0);
     m_led = new AddressableLED(9);
     m_ledBuffer = new AddressableLEDBuffer(LENGTH);     
 
@@ -40,8 +41,8 @@ public class Led extends SubsystemBase {
   }
 
   public void elevatorlvl4() {
-    // For every pixel
-    if((encoderAngle.get()*360) >= lvl_4_Angle - threshold&& (encoderAngle.get()*360) <= lvl_4_Angle + threshold) {
+        // For every pixel
+        if((encoderAngle.get()*360) >= lvl_4_Angle - threshold&& (encoderAngle.get()*360) <= lvl_4_Angle + threshold) {
       position = in_position;
     } else {
       position = not_in_position;
@@ -52,7 +53,7 @@ public class Led extends SubsystemBase {
     m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
     }
 
     m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
@@ -79,7 +80,7 @@ public class Led extends SubsystemBase {
     m_ledBuffer.setHSV((3*segment_size)+j, position, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
     }
     m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
     m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
@@ -97,13 +98,12 @@ public class Led extends SubsystemBase {
       position = not_in_position;
     }
     for (var j = 0; j < segment_size; j+=1) {
-    //System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, position, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
     }
     m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
     m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
@@ -121,13 +121,12 @@ public class Led extends SubsystemBase {
       position = not_in_position;
     }
     for (var j = 0; j < segment_size; j+=1) {
-    //System.out.println("j:" + j); 
     
     m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV((segment_size)+j, position, 255, 32);
-    m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
     }
     m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
     m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
@@ -137,26 +136,27 @@ public class Led extends SubsystemBase {
     m_led.setData(m_ledBuffer);
      
   }
-  public void NoCoral() {
+  public void Coral() {
     // For every pixel
     if((encoderAngle.get()*360) >= lvl_0_Angle - threshold&& (encoderAngle.get()*360) <= lvl_0_Angle + threshold) {
       position = in_position;
     } else {
       position = not_in_position;
     } 
+
     for (var j = 0; j < segment_size; j+=1) {
-      //System.out.println("j:" + j); 
-    m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
+    // m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
+    // m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
+    // m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
+    // m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
     m_ledBuffer.setHSV(j, position, 255, 32);
 }
-    m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
+    // m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
+    // m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
+    // m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
+    // m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
 
-m_led.setData(m_ledBuffer);
+    m_led.setData(m_ledBuffer);
+    SmartDashboard.putNumber("Encoder", encoderAngle.get() * 360);
   }
 }

@@ -16,13 +16,13 @@ public class Lvl3Led extends Command {
   public Lvl3Led(Led Lvl3Led) {
     this.led = Lvl3Led;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(Lvl3Led
-);
+    addRequirements(Lvl3Led);
   }
 
   @Override
   public void execute() {
     led.elevatorlvl3();
+    led.Coral();
   }
 
   public boolean isFinished() {
