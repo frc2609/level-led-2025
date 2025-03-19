@@ -10,6 +10,8 @@ import frc.robot.commands.Lvl1Led;
 import frc.robot.commands.Lvl2Led;
 import frc.robot.commands.Lvl3Led;
 import frc.robot.commands.Lvl4Led;
+import frc.robot.commands.L2AlgaeLed;
+import frc.robot.commands.L3AlgaeLed;
 import frc.robot.subsystems.Led;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -34,6 +36,8 @@ public class RobotContainer {
   private final Lvl3Led lvl3command = new Lvl3Led(led);
   private final Lvl2Led lvl2command = new Lvl2Led(led);
   private final Lvl1Led lvl1command = new Lvl1Led(led);
+  private final L3AlgaeLed l3algaecommand = new L3AlgaeLed(led);
+  private final L2AlgaeLed l2algaecommand = new L2AlgaeLed(led);
   private final NoCoralLed nocoralcommand = new NoCoralLed(led);
   
   // Replace with CommandPS4Controller or CommandJoystick if needed
@@ -65,6 +69,9 @@ public class RobotContainer {
     m_driverController.b().onTrue(lvl2command);
     m_driverController.a().onTrue(lvl1command);
     
+    // Algae commands on right stick buttons
+    m_driverController.povUp().onTrue(l3algaecommand);
+    m_driverController.povDown().onTrue(l2algaecommand);
   }
 
   private void configureDefaultCommands() {
