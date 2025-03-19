@@ -3,8 +3,6 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
 import edu.wpi.first.wpilibj.DutyCycleEncoder;
-import edu.wpi.first.wpilibj.XboxController;
-import edu.wpi.first.wpilibj.event.EventLoop;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -21,10 +19,10 @@ public class Led extends SubsystemBase {
   private DutyCycleEncoder encoderAngle = new DutyCycleEncoder(0);
   private Trigger is_coral = m_Controller.leftBumper();
 
-  final int seperation = 0;//led hue
   final int not_selected = 0;//led hue
   final int in_position = 30;//led hue
   final int not_in_position = 90;//led hue
+  final int algae_position = 120;//led hue - blue
   int position = not_in_position;//led hue
   int coral_in = not_in_position;//led hue
   private static final int LENGTH = 73;
@@ -50,123 +48,201 @@ public class Led extends SubsystemBase {
 
   public void elevatorlvl4() {
         // For every pixel
-        if((encoderAngle.get()*360) >= lvl_4_Angle - threshold&& (encoderAngle.get()*360) <= lvl_4_Angle + threshold) {
+    if((encoderAngle.get()*360) >= lvl_4_Angle - threshold&& (encoderAngle.get()*360) <= lvl_4_Angle + threshold) {
       position = in_position;
     } else {
       position = not_in_position;
     }
+
+    // Calculate separator positions
+    int sep1 = segment_size;
+    int sep2 = 2 * segment_size;
+    int sep3 = 3 * segment_size;
+    int sep4 = 4 * segment_size;
+    
+    // Set the segments
     for (var j = 0; j < segment_size; j+=1) {
-    //System.out.println("j:" + j);
-    m_ledBuffer.setHSV((4*segment_size)+j, position, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((4*segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
     }
 
-    m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
+    // Set separator LEDs
+    m_ledBuffer.setRGB(sep1, 0, 0, 0);
+    m_ledBuffer.setRGB(sep2, 0, 0, 0);
+    m_ledBuffer.setRGB(sep3, 0, 0, 0);
+    m_ledBuffer.setRGB(sep4, 0, 0, 0);
     
     m_led.setData(m_ledBuffer);
-
-    
-     
   }
   public void elevatorlvl3() {
-    // For every pixel
-    if((encoderAngle.get()*360) >= lvl_3_Angle - threshold&& (encoderAngle.get()*360) <= lvl_3_Angle + threshold) {
+    if ((encoderAngle.get()*360) >= lvl_3_Angle - threshold && 
+        (encoderAngle.get()*360) <= lvl_3_Angle + threshold) {
       position = in_position;
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size; j+=1) {
-    //System.out.println("j:" + j); 
+
+    // Calculate separator positions
+    int sep1 = segment_size;
+    int sep2 = 2 * segment_size;
+    int sep3 = 3 * segment_size;
+    int sep4 = 4 * segment_size;
     
-    m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size)+j, position, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    // Set the segments
+    for (var j = 0; j < segment_size; j++) {
+      m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
     }
-    m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
+
+    // Set separator LEDs
+    m_ledBuffer.setRGB(sep1, 0, 0, 0);
+    m_ledBuffer.setRGB(sep2, 0, 0, 0);
+    m_ledBuffer.setRGB(sep3, 0, 0, 0);
+    m_ledBuffer.setRGB(sep4, 0, 0, 0);
     
     m_led.setData(m_ledBuffer);
-     
   }
+
   public void elevatorlvl2() {
-    // For every pixel
-    if((encoderAngle.get()*360) >= lvl_2_Angle - threshold&& (encoderAngle.get()*360) <= lvl_2_Angle + threshold) {
+    if ((encoderAngle.get()*360) >= lvl_2_Angle - threshold && 
+        (encoderAngle.get()*360) <= lvl_2_Angle + threshold) {
       position = in_position;
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size; j+=1) {
+
+    // Calculate separator positions
+    int sep1 = segment_size;
+    int sep2 = 2 * segment_size;
+    int sep3 = 3 * segment_size;
+    int sep4 = 4 * segment_size;
     
-    m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size)+j, position, 255, 32);
-    m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    // Set the segments
+    for (var j = 0; j < segment_size; j++) {
+      m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
     }
-    m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
+
+    // Set separator LEDs
+    m_ledBuffer.setRGB(sep1, 0, 0, 0);
+    m_ledBuffer.setRGB(sep2, 0, 0, 0);
+    m_ledBuffer.setRGB(sep3, 0, 0, 0);
+    m_ledBuffer.setRGB(sep4, 0, 0, 0);
     
     m_led.setData(m_ledBuffer);
-     
   }
+
   public void elevatorlvl1() {
-    // For every pixel
-    if((encoderAngle.get()*360) >= lvl_1_Angle - threshold&& (encoderAngle.get()*360) <= lvl_1_Angle + threshold) {
+    if ((encoderAngle.get()*360) >= lvl_1_Angle - threshold && 
+        (encoderAngle.get()*360) <= lvl_1_Angle + threshold) {
       position = in_position;
     } else {
       position = not_in_position;
     }
-    for (var j = 0; j < segment_size; j+=1) {
+
+    // Calculate separator positions
+    int sep1 = segment_size;
+    int sep2 = 2 * segment_size;
+    int sep3 = 3 * segment_size;
+    int sep4 = 4 * segment_size;
     
-    m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV((segment_size)+j, position, 255, 32);
-    //m_ledBuffer.setHSV(j, not_selected, 255, 32);
+    // Set the segments
+    for (var j = 0; j < segment_size; j++) {
+      m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, position, 255, 32);
     }
-    m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
-    m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
+
+    // Set separator LEDs
+    m_ledBuffer.setRGB(sep1, 0, 0, 0);
+    m_ledBuffer.setRGB(sep2, 0, 0, 0);
+    m_ledBuffer.setRGB(sep3, 0, 0, 0);
+    m_ledBuffer.setRGB(sep4, 0, 0, 0);
     
     m_led.setData(m_ledBuffer);
-     
   }
+
   public void Coral() {
-    // For every pixel
-    if(is_coral.getAsBoolean()) {
+    if (is_coral.getAsBoolean()) {
       coral_in = in_position;
-      System.out.println("no");
     } else {
       coral_in = not_in_position;
-      System.out.println("yea");
     } 
 
-    for (var j = 0; j < segment_size; j+=1) {
-    // m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
-    // m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
-    // m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
-    // m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
-    m_ledBuffer.setHSV(j, coral_in, 255, 32);
-}
-    // m_ledBuffer.setHSV((segment_size), seperation, 255, 32);
-    // m_ledBuffer.setHSV((2*segment_size), seperation, 255, 32);
-    // m_ledBuffer.setHSV((3*segment_size), seperation, 255, 32);
-    // m_ledBuffer.setHSV((4*segment_size), seperation, 255, 32);
+    for (var j = 0; j < segment_size; j++) {
+      m_ledBuffer.setHSV(j, coral_in, 255, 32);
+    }
 
     m_led.setData(m_ledBuffer);
     SmartDashboard.putNumber("Encoder", encoderAngle.get() * 360);
+  }
+
+  public void l3algae() {
+    if ((encoderAngle.get()*360) >= lvl_3_Angle - threshold && 
+        (encoderAngle.get()*360) <= lvl_3_Angle + threshold) {
+      position = algae_position;
+    } else {
+      position = not_in_position;
+    }
+
+    // Calculate separator positions
+    int sep1 = segment_size;
+    int sep2 = 2 * segment_size;
+    int sep3 = 3 * segment_size;
+    int sep4 = 4 * segment_size;
+    
+    // Set the segments
+    for (var j = 0; j < segment_size; j++) {
+      m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, 120, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
+    }
+
+    // Set separator LEDs
+    m_ledBuffer.setRGB(sep1, 0, 0, 0);
+    m_ledBuffer.setRGB(sep2, 0, 0, 0);
+    m_ledBuffer.setRGB(sep3, 0, 0, 0);
+    m_ledBuffer.setRGB(sep4, 0, 0, 0);
+    
+    m_led.setData(m_ledBuffer);
+  }
+
+  public void l2algae() {
+    if ((encoderAngle.get()*360) >= lvl_2_Angle - threshold && 
+        (encoderAngle.get()*360) <= lvl_2_Angle + threshold) {
+      position = algae_position;
+    } else {
+      position = not_in_position;
+    }
+
+    // Calculate separator positions
+    int sep1 = segment_size;
+    int sep2 = 2 * segment_size;
+    int sep3 = 3 * segment_size;
+    int sep4 = 4 * segment_size;
+    
+    // Set the segments
+    for (var j = 0; j < segment_size; j++) {
+      m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, 120, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
+    }
+
+    // Set separator LEDs
+    m_ledBuffer.setRGB(sep1, 0, 0, 0);
+    m_ledBuffer.setRGB(sep2, 0, 0, 0);
+    m_ledBuffer.setRGB(sep3, 0, 0, 0);
+    m_ledBuffer.setRGB(sep4, 0, 0, 0);
+    
+    m_led.setData(m_ledBuffer);
   }
 }
