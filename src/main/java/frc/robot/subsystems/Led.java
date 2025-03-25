@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.AddressableLED;
 import edu.wpi.first.wpilibj.AddressableLEDBuffer;
-import edu.wpi.first.wpilibj.DutyCycleEncoder;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
@@ -16,23 +15,15 @@ public class Led extends SubsystemBase {
 
   private AddressableLED m_led;
   private AddressableLEDBuffer m_ledBuffer;
-  private DutyCycleEncoder encoderAngle = new DutyCycleEncoder(0);
   private Trigger is_coral = m_Controller.leftBumper();
 
-  final int not_selected = 0;//led hue
-  final int in_position = 30;//led hue
-  final int not_in_position = 90;//led hue
+  final int not_selected = 0;//led hue - red
+  final int in_position = 60;//led hue - green
+  final int not_in_position = 0;//led hue - red
   final int algae_position = 120;//led hue - blue
-  int position = not_in_position;//led hue
   int coral_in = not_in_position;//led hue
   private static final int LENGTH = 73;
   final int segment_size = (LENGTH/5);
-  int lvl_4_Angle = 45;
-  int lvl_3_Angle = 35;
-  int lvl_2_Angle = 35;
-  int lvl_1_Angle = 10;
-  int lvl_0_Angle = 180;
-  int threshold = 5;
   public Led() {
     // Init variables here
     SmartDashboard.putNumber("Encoder", 0);
@@ -47,13 +38,7 @@ public class Led extends SubsystemBase {
   }
 
   public void elevatorlvl4() {
-        // For every pixel
-    if((encoderAngle.get()*360) >= lvl_4_Angle - threshold&& (encoderAngle.get()*360) <= lvl_4_Angle + threshold) {
-      position = in_position;
-    } else {
-      position = not_in_position;
-    }
-
+    
     // Calculate separator positions
     int sep1 = segment_size;
     int sep2 = 2 * segment_size;
@@ -62,7 +47,7 @@ public class Led extends SubsystemBase {
     
     // Set the segments
     for (var j = 0; j < segment_size; j+=1) {
-      m_ledBuffer.setHSV((4*segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((4*segment_size)+j, in_position, 255, 32);
       m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
       m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
       m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
@@ -77,12 +62,6 @@ public class Led extends SubsystemBase {
     m_led.setData(m_ledBuffer);
   }
   public void elevatorlvl3() {
-    if ((encoderAngle.get()*360) >= lvl_3_Angle - threshold && 
-        (encoderAngle.get()*360) <= lvl_3_Angle + threshold) {
-      position = in_position;
-    } else {
-      position = not_in_position;
-    }
 
     // Calculate separator positions
     int sep1 = segment_size;
@@ -93,7 +72,7 @@ public class Led extends SubsystemBase {
     // Set the segments
     for (var j = 0; j < segment_size; j++) {
       m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
-      m_ledBuffer.setHSV((3*segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((3*segment_size)+j, in_position, 255, 32);
       m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
       m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
     }
@@ -108,12 +87,6 @@ public class Led extends SubsystemBase {
   }
 
   public void elevatorlvl2() {
-    if ((encoderAngle.get()*360) >= lvl_2_Angle - threshold && 
-        (encoderAngle.get()*360) <= lvl_2_Angle + threshold) {
-      position = in_position;
-    } else {
-      position = not_in_position;
-    }
 
     // Calculate separator positions
     int sep1 = segment_size;
@@ -125,7 +98,7 @@ public class Led extends SubsystemBase {
     for (var j = 0; j < segment_size; j++) {
       m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
       m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
-      m_ledBuffer.setHSV((2*segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((2*segment_size)+j, in_position, 255, 32);
       m_ledBuffer.setHSV((segment_size)+j, not_selected, 255, 32);
     }
 
@@ -139,12 +112,6 @@ public class Led extends SubsystemBase {
   }
 
   public void elevatorlvl1() {
-    if ((encoderAngle.get()*360) >= lvl_1_Angle - threshold && 
-        (encoderAngle.get()*360) <= lvl_1_Angle + threshold) {
-      position = in_position;
-    } else {
-      position = not_in_position;
-    }
 
     // Calculate separator positions
     int sep1 = segment_size;
@@ -157,7 +124,7 @@ public class Led extends SubsystemBase {
       m_ledBuffer.setHSV((4*segment_size)+j, not_selected, 255, 32);
       m_ledBuffer.setHSV((3*segment_size)+j, not_selected, 255, 32);
       m_ledBuffer.setHSV((2*segment_size)+j, not_selected, 255, 32);
-      m_ledBuffer.setHSV((segment_size)+j, position, 255, 32);
+      m_ledBuffer.setHSV((segment_size)+j, in_position, 255, 32);
     }
 
     // Set separator LEDs
@@ -181,16 +148,9 @@ public class Led extends SubsystemBase {
     }
 
     m_led.setData(m_ledBuffer);
-    SmartDashboard.putNumber("Encoder", encoderAngle.get() * 360);
   }
 
   public void l3algae() {
-    if ((encoderAngle.get()*360) >= lvl_3_Angle - threshold && 
-        (encoderAngle.get()*360) <= lvl_3_Angle + threshold) {
-      position = algae_position;
-    } else {
-      position = not_in_position;
-    }
 
     // Calculate separator positions
     int sep1 = segment_size;
@@ -216,13 +176,7 @@ public class Led extends SubsystemBase {
   }
 
   public void l2algae() {
-    if ((encoderAngle.get()*360) >= lvl_2_Angle - threshold && 
-        (encoderAngle.get()*360) <= lvl_2_Angle + threshold) {
-      position = algae_position;
-    } else {
-      position = not_in_position;
-    }
-
+    
     // Calculate separator positions
     int sep1 = segment_size;
     int sep2 = 2 * segment_size;

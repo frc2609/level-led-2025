@@ -16,7 +16,7 @@ public class NoCoralLed extends Command {
   public NoCoralLed(Led NoCoralLed) {
     this.led = NoCoralLed;
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(NoCoralLed);
+    addRequirements(NoCoralLed); 
   }
 
   @Override
